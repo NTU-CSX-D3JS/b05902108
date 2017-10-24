@@ -1,0 +1,44 @@
+<html>
+<body>
+
+<h1>My first SVG</h1>
+
+<svg width="800" height="800">
+  <defs>
+    <filter id="f1" x="-0.1" y="-0.1">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+    </filter>
+    <filter id="f2" x="0" y="0" width="500%" height="500%">
+      <feOffset result="offOut" in="SourceGraphic" dx="10" dy="10" />
+      <feColorMatrix result="matrixOut" in="offOut" type="matrix"
+      values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0" />
+      <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="15" />
+      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+    </filter>
+    <filter id="f3" x="-0.1" y="-0.1">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+    </filter>
+  </defs>
+  
+  <ellipse cx="100" cy="530" rx="150" ry="50" transform="rotate(-30 0,0)"
+  style="fill:black;stroke:purple;stroke-width:2" filter="url(#f3)"/>
+
+  <circle cx="250" cy="166" r="40" stroke="green" stroke-width="4" fill="blue" filter="url(#f1)"/>
+  <circle cx="250" cy="286" r="80" stroke="green" stroke-width="4" fill="white" />
+  
+
+  <line x1="200" y1="226" x2="130" y2="140" style="stroke:rgb(255,0,0);stroke-width:2" filter="url(#f2)"/>
+  <line x1="300" y1="226" x2="370" y2="140" style="stroke:rgb(255,0,0);stroke-width:2" filter="url(#f2)"/>
+  
+  <line x1="220" y1="360" x2="210" y2="460" style="stroke:rgb(255,0,0);stroke-width:2" filter="url(#f2)"/>
+  <line x1="280" y1="360" x2="290" y2="460" style="stroke:rgb(255,0,0);stroke-width:2" filter="url(#f2)"/>
+  <polygon points="210,460 220,480 180,485" style="fill:lime;stroke:purple;stroke-width:1" filter="url(#f2)"/>
+  <polygon points="290,460 280,480 320,485" style="fill:lime;stroke:purple;stroke-width:1" filter="url(#f2)"/>
+
+  <text x="240" y="15" fill="red" size="200%"  transform="rotate(30 -150,-300)">Test.</text>
+
+</svg>
+
+
+</body>
+</html>
