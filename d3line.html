@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://d3js.org/d3.v4.js"></script>
+	<meta charset="uft-8">
+</head>
+<body>
+	<script type="text/javascript">
+		var url = "https://ntu-csx-d3js.github.io/b05902108/macro.csv";
+		d3.csv(url, function(data){
+			console.log(data);
+			
+
+			var w = 1200;
+			var h = 600;
+
+			var n = 60;
+
+			var Ymax = d3.max(data, function(d){return d.GDP;});
+			var Ymin = d3.min(data, function(d){return d.NX;});
+			var Xmax = d3.max(data, function(d){return d.Year;});
+			var Xmin = d3.min(data, function(d){return d.Year;});
+		
+			var xScale = d3.scaleLinear().domain([Xmin , Xmax]).range([n, 800-n]);
+			var yScale = d3.scaleLinear().domain([Ymin , Ymax]).range([h-n, n]);
+
+			var svg = d3.select('body').append('svg').attr('width', w).attr('height', h);
+			
+			
+			//GDP
+			var lineBC = d3.line().x(function(d){return xScale(d.Year);}).y(function(d){return yScale(d.GDP);});
+			var lineChart = svg.append("path").attr("class", "line").attr("stroke", "red").attr("stroke-width", 3).attr("fill", "none").attr("d", function(d){return lineBC(data);});
+
+			//C
+			var lineBC = d3.line().x(function(d){return xScale(d.Year);}).y(function(d){return yScale(d.C);});
+			var lineChart = svg.append("path").attr("class", "line").attr("stroke", "blue").attr("stroke-width", 3).attr("fill", "none").attr("d", function(d){return lineBC(data);});
+
+			//G
+			var lineBC = d3.line().x(function(d){return xScale(d.Year);}).y(function(d){return yScale(d.G);});
+			var lineChart = svg.append("path").attr("class", "line").attr("stroke", "green").attr("stroke-width", 3).attr("fill", "none").attr("d", function(d){return lineBC(data);});
+
+			//X
+			var lineBC = d3.line().x(function(d){return xScale(d.Year);}).y(function(d){return yScale(d.X);});
+			var lineChart = svg.append("path").attr("class", "line").attr("stroke", "yellow").attr("stroke-width", 3).attr("fill", "none").attr("d", function(d){return lineBC(data);});
+
+			//M
+			var lineBC = d3.line().x(function(d){return xScale(d.Year);}).y(function(d){return yScale(d.M);});
+			var lineChart = svg.append("path").attr("class", "line").attr("stroke", "black").attr("stroke-width", 3).attr("fill", "none").attr("d", function(d){return lineBC(data);});
+
+			//NX
+			var lineBC = d3.line().x(function(d){return xScale(d.Year);}).y(function(d){return yScale(d.NX);});
+			var lineChart = svg.append("path").attr("class", "line").attr("stroke", "purple").attr("stroke-width", 3).attr("fill", "none").attr("d", function(d){return lineBC(data);});
+
+			//Axis
+			var yAxis = d3.axisLeft(yScale);
+			var xAxis = d3.axisBottom(xScale);
+			svg.append("g").attr("class", "axis").attr("transform", "translate(0, "+(h-n)+")").call(xAxis);
+			svg.append("g").attr("class", "axis").attr("transform", "translate("+(n)+", 0)").call(yAxis);
+
+			//圖名稱
+			svg.append("text").attr("x", (800 / 2)).attr("y", n).attr("text-anchor", "middle").style("font-size", "3.0em").attr("fill", "black").style("font-weight", 10).text("歷年總體經濟資料");
+
+			//座標單位
+			svg.append("text").attr("x", (780)).attr("y", h-50).attr("text-anchor", "middle").style("font-size", "1.0em").attr("fill", "black").style("font-weight", 10).text("年份");
+			svg.append("text").attr("x", (50)).attr("y", 40).attr("text-anchor", "middle").style("font-size", "1.0em").attr("fill", "black").style("font-weight", 10).text("百萬新台幣");
+
+			//標示
+			svg.append("text").attr("x", (900)).attr("y", 200).attr("text-anchor", "middle").style("font-size", "1.5em").attr("fill", "blue").style("font-weight", 10).text("C--民間消費");
+			svg.append("text").attr("x", (900)).attr("y", 250).attr("text-anchor", "middle").style("font-size", "1.5em").attr("fill", "green").style("font-weight", 10).text("G--政府消費");
+			svg.append("text").attr("x", (900)).attr("y", 300).attr("text-anchor", "middle").style("font-size", "1.5em").attr("fill", "yellow").style("font-weight", 10).text("X--出口");
+			svg.append("text").attr("x", (900)).attr("y", 350).attr("text-anchor", "middle").style("font-size", "1.5em").attr("fill", "black").style("font-weight", 10).text("M--進口");
+			svg.append("text").attr("x", (900)).attr("y", 400).attr("text-anchor", "middle").style("font-size", "1.5em").attr("fill", "purple").style("font-weight", 10).text("NX--進口減出口");
+			svg.append("text").attr("x", (900)).attr("y", 450).attr("text-anchor", "middle").style("font-size", "1.5em").attr("fill", "red").style("font-weight", 10).text("GDP--國內生產毛額");
+		});
+	</script>
+</body>
+</html>
+
