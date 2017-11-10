@@ -2,7 +2,7 @@
 <html>
 <head>
 	<script src="https://d3js.org/d3.v4.js"></script>
-	<meta charset="uft-8">
+	<meta charset="UTF-8">
 	<style>
 		body{
 			background-color: #c6e9f3;
@@ -76,9 +76,13 @@
 			svg.append("text").attr("x", (906)).attr("y", 450).attr("text-anchor", "middle").style("font-size", "1.5em").attr("fill", "red").style("font-weight", 10).text("GDP--國內生產毛額");
 
 			//資料來源
-			svg.append("text").attr("x", (950)).attr("y", 580).attr("text-anchor", "middle").style("font-size", "0.8em").attr("fill", "black").style("font-weight", 10).text("資料來源：行政院主計處總體資料庫").on("click", function() { window.open("http://statdb.dgbas.gov.tw/pxweb/Dialog/statfile9L.asp"); });
 		});
 	</script>
+	<div>
+		<a href="http://statdb.dgbas.gov.tw/pxweb/Dialog/statfile9L.asp">
+			<h3 align="right">資料來源：行政院主計處總體資料庫</h3>
+		</a>	
+	</div>
 </body>
 </html>
 
