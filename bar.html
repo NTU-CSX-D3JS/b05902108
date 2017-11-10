@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://d3js.org/d3.v4.js"></script>
+	<meta charset="UTF-8">
+	<style>
+		body{
+			background-color: #c6e9f5;
+		}
+	</style>
+</head>
+<body>
+	<div class = 'a'></div>
+	<div class = 'b'></div>
+	<script type="text/javascript">
+		var url = "https://ntu-csx-d3js.github.io/b05902108/m.csv";
+		
+		d3.csv(url, function(data){
+			var w = 600;
+			var u = 20;
+			var l = 100;
+			var h0 = 300;
+			var h = 800;
+			
+			//minor array 
+			var minorA = [];
+			for(var i = 0 ; i < data.length; i++){
+				minorA[i] = parseInt(data[i].minor)
+			}
+			var xScale = d3.scaleBand()
+							.domain(d3.range(minorA.length))
+							.rangeRound([0, w]).padding(0.05);
+
+			var yScale = d3.scaleLinear()
+							.domain([0, d3.max(minorA)])
+							.range([h0,0]);
+			
+			
+			//Create SVG element
+			var svg = d3.select("div.a")
+						.append("svg")
+						.attr("width", l+w)
+						.attr("height", h/2);
+
+			//Create minor bars
+			svg.selectAll("rect")
+			   .data(minorA)
+			   .enter()
+			   .append("rect")
+			   .attr("x", function(d, i) {
+			   		return l+xScale(i);
+			   })
+			   .attr("y", function(d) {
+			   		return u+yScale(d);
+			   })
+			   .attr("width", xScale.bandwidth())
+			   .attr("height", function(d) {
+			   		return h0-yScale(d);
+			   })
+			   .attr("fill", function(d) {
+					return "rgb(0, 0, 255)";
+			   })
+			   .on("click", function(d) {
+			   		console.log(d);
+			   });
+
+			//Create minor labels
+			svg.selectAll("text")
+			   .data(minorA)
+			   .enter()
+			   .append("text")
+			   .attr("text-anchor", "middle")
+			   .attr("x", function(d, i) {
+			   		return l+xScale(i) + xScale.bandwidth() / 2;
+			   })
+			   .attr("y", function(d) {
+			   		return yScale(d) + u-1;
+			   })
+			   .text(function(d,i) {
+			   		return d;
+			   })
+			   .attr("font-family", "sans-serif")
+			   .attr("font-size", "11px")
+			   .attr("fill", "black")
+			   .append('svg:tspan')
+			   .attr("x", function(d, i){
+			   		return l+xScale(i) + xScale.bandwidth() / 2;
+			   })
+			   .attr("y", function(d) {
+			   		return h0+u+15;
+			   })
+			   .text(function(d,i) {
+			   		return data[i].where;
+			   })
+
+			//axis for minor
+			var yAxis_min = d3.axisLeft(yScale);
+			var xAxis_min = d3.axisBottom(xScale);
+			xAxis_min.tickFormat("");
+			svg.append("g").attr("class", "axis").attr("transform", "translate("+(l)+", "+(h0+u)+")").call(xAxis_min);
+			svg.append("g").attr("class", "axis").attr("transform", "translate("+(l)+", "+(u)+")").call(yAxis_min);
+
+
+			//major array 
+			var majorA = [];
+			for(var i = 0 ; i < data.length; i++){
+				majorA[i] = parseInt(data[i].double)
+			}
+			
+			var xScale2 = d3.scaleBand()
+							.domain(d3.range(majorA.length))
+							.rangeRound([0, w]).padding(0.05);
+
+			var yScale2 = d3.scaleLinear()
+							.domain([0, d3.max(majorA)])
+							.range([h0, 0]);
+			
+			var svg2 = d3.select("div.b")
+						.append("svg")
+						.attr("width", l+w)
+						.attr("height", h/2);
+
+			//Create major bars
+			svg2.selectAll("rect")
+			   .data(majorA)
+			   .enter()
+			   .append("rect")
+			   .attr("x", function(d, i) {
+			   		return l+xScale2(i);
+			   })
+			   .attr("y", function(d) {
+			   		return u + yScale2(d);
+			   })
+			   .attr("width", xScale2.bandwidth())
+			   .attr("height", function(d) {
+			   		return h0-yScale2(d);
+			   })
+			   .attr("fill", function(d) {
+					return "rgb(255, 0, 0)";
+			   })
+			   .on("click", function(d) {
+			   		console.log(d);
+			   });
+
+			//Create major labels
+			svg2.selectAll("text")
+			   .data(majorA)
+			   .enter()
+			   .append("text")
+			   .text(function(d) {
+			   		return d;
+			   })
+			   .attr("text-anchor", "middle")
+			   .attr("x", function(d, i) {
+			   		return l+xScale2(i) + xScale2.bandwidth() / 2;
+			   })
+			   .attr("y", function(d) {
+			   		return yScale2(d) + u-1;
+			   })
+			   .attr("font-family", "sans-serif")
+			   .attr("font-size", "11px")
+			   .attr("fill", "black")
+			   .append('svg:tspan')
+			   .attr("x", function(d, i){
+			   		return l+xScale(i) + xScale.bandwidth() / 2;
+			   })
+			   .attr("y", function(d) {
+			   		return h0+u+15;
+			   })
+			   .text(function(d,i) {
+			   		return data[i].where;
+			   })
+			
+			//axis for major
+			var yAxis_maj = d3.axisLeft(yScale2);
+			var xAxis_maj = d3.axisBottom(xScale2);
+			xAxis_maj.tickFormat("");
+			svg2.append("g").attr("class", "axis").attr("transform", "translate("+(l)+", "+(h0+u)+")").call(xAxis_maj);
+			svg2.append("g").attr("class", "axis").attr("transform", "translate("+(l)+", "+(u)+")").call(yAxis_maj);
+
+			//minor title
+			svg.append("text").attr("x", (w+l)/2).attr("y", h0+4*u).attr("text-anchor", "middle").style("font-size", "2.0em").attr("fill", "black").style("font-weight", 10).text("106 double major in NTU");
+			//major title
+			svg2.append("text").attr("x", (w+l)/2).attr("y", h0+4*u).attr("text-anchor", "middle").style("font-size", "2.0em").attr("fill", "black").style("font-weight", 10).text("106 minor in NTU");
+		})
+	</script>
+
+	
+	<div x="400"><a href="http://reg227.aca.ntu.edu.tw/tmd/stuquery/">
+		<h3 align="right">資料來源：台大雙主修、輔修首頁</h3>
+	</a></div>
+
+</body>
+</html>
