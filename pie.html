@@ -7,8 +7,7 @@
 		body{
 			background-color: #f2fef6;
 		}
-		.floating-box{ display: inline-block;}
-		#source{ position: fixed; bottom: 0; width: 100%;}
+		.pie_style{ display: inline-block;}
 	</style>
 </head>
 <body>
@@ -16,12 +15,12 @@
 		<h1 align="center">總體所佔比例圓餅圖</h1>
 	</div>
 	<div align="center">
-		<div id="chart0" class="floating-box"></div>
-		<div id="chart1" class="floating-box"></div>
-		<div id="chart2" class="floating-box"></div>
-		<div id="chart3" class="floating-box"></div>
-		<div id="chart4" class="floating-box"></div>
-		<div id="chart5" class="floating-box"></div>
+		<div id="chart0" class="pie_style"></div>
+		<div id="chart1" class="pie_style"></div>
+		<div id="chart2" class="pie_style"></div>
+		<div id="chart3" class="pie_style"></div>
+		<div id="chart4" class="pie_style"></div>
+		<div id="chart5" class="pie_style"></div>
 	</div>
 	<script>
 		var url = "https://ntu-csx-d3js.github.io/b05902108/macro.csv";
@@ -79,8 +78,10 @@
 			}
 		});
 	</script>
-	<div ><a href="http://statdb.dgbas.gov.tw/pxweb/Dialog/statfile9L.asp">
-		<h3 align="right">資料來源：行政院主計處總體資料庫</h3>
-	</a></div>
+	<div>
+		<a href="http://statdb.dgbas.gov.tw/pxweb/Dialog/statfile9L.asp">
+			<h3 align="right">資料來源：行政院主計處總體資料庫</h3>
+		</a>
+	</div>
 </body>
 </html>
