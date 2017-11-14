@@ -26,7 +26,7 @@
 			
 			var typecolor = [d3.scale.category20c(), d3.scale.category10(), d3.scale.category20(), d3.scale.category20b(), d3.scale.category20c(), d3.scale.category10()];
 			var w = 400;
-			var h = 400;
+			var h = 350;
 			var r = 100;
 			for(var loop = 0; loop < 6; loop++){
 				var color = typecolor[loop]; 
@@ -40,7 +40,7 @@
 				var str2 = loop.toString();
 				var where = str1.concat(str2);
 				
-				var vis = d3.select(where).append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+				var vis = d3.select(where).append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + (r+60) + "," + (r+40) + ")");
 				var pie = d3.layout.pie().value(function(d){return d.value;});
 
 				// declare an arc generator function
