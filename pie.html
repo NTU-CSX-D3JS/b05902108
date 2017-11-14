@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://d3js.org/d3.v3.js"></script>
+	<meta charset="UTF-8">
+	<style>
+		body{
+			background-color: #fdfef3;
+		}
+		#chart0{ width:250px; min-height:70px; float:left; margin-right:10px; }
+		#chart1{ width:250px; min-height:70px; float:left; margin-right:10px; }
+		#chart2{ width:250px; min-height:70px; float:left; margin-right:10px; }
+		#chart3{ width:250px; min-height:70px; float:left; margin-right:10px; }
+		#chart4{ width:250px; min-height:70px; float:left; margin-right:10px; }
+		#chart5{ width:250px; min-height:70px; float:left; margin-right:10px; }
+		#source{ width:500px; min-height:70px; float:left; margin-right:10px;  }
+	</style>
+</head>
+<body>
+	<div id="chart0"></div>
+	<div id="chart1"></div>
+	<div id="chart2"></div>
+	<div id="chart3"></div>
+	<div id="chart4"></div>
+	<div id="chart5"></div>
+	<script>
+		var url = "https://ntu-csx-d3js.github.io/b05902108/macro.csv";
+		d3.csv(url, function(temp){
+			
+			var typecolor = [d3.scale.category20c(), d3.scale.category10(), d3.scale.category20(), d3.scale.category20b(), d3.scale.category20c(), d3.scale.category10()];
+			var w = 400;
+			var h = 400;
+			var r = 100;
+			for(var loop = 0; loop < 6; loop++){
+				var color = typecolor[loop]; 
+
+				var data = [{"label":"消費", "value":parseInt(temp[loop].C)},
+							{"label":"出口", "value":parseInt(temp[loop].X)},
+							{"label":"進口", "value":parseInt(temp[loop].M)},
+							{"label":"政府消費", "value":parseInt(temp[loop].G)}];
+
+				var str1 = "#chart";
+				var str2 = loop.toString();
+				var where = str1.concat(str2);
+				
+				var vis = d3.select(where).append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+				var pie = d3.layout.pie().value(function(d){return d.value;});
+
+				// declare an arc generator function
+				var arc = d3.svg.arc().outerRadius(r);
+
+				// select paths, use arc generator to draw
+				var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+				arcs.append("svg:path")
+				    .attr("fill", function(d, i){
+				        return color(i);
+				    })
+				    .attr("d", function (d) {
+				        // log the result of the arc generator to show how cool it is :)
+				        console.log(arc(d));
+				        return arc(d);
+				    });
+
+				// add the text
+				arcs.append("svg:text").attr("transform", function(d){
+							d.innerRadius = 0;
+							d.outerRadius = r;
+				    return "translate(" + arc.centroid(d) + ")";}).attr("text-anchor", "middle").text( function(d, i) {
+				    return data[i].label;}
+						);
+
+				// add title 
+				var year = 1981 + loop;
+				var str11 = year.toString();
+				var str22 = "年，進出口和消費比例"
+				var what = str11.concat(str22);
+
+				arcs.append("text").attr("x", 10).attr("y", 130).attr("text-anchor", "middle").style("font-size", "1.0em").attr("fill", "black").style("font-weight", 10).text(what);
+			}
+		});
+	</script>
+	<div id="source"><a href="http://statdb.dgbas.gov.tw/pxweb/Dialog/statfile9L.asp">
+		<h3 align="right">資料來源：行政院主計處總體資料庫</h3>
+	</a></div>
+</body>
+</html>
