@@ -20,10 +20,10 @@
 			var xr = 800;
 			var n = 60;
 
-			var Ymax = 17118694;//d3.max(data, function(d){return d.X;});
-			var Ymin = d3.min(data, function(d){return d.NX;});
-			var Xmax = d3.max(data, function(d){return d.Year;});
-			var Xmin = d3.min(data, function(d){return d.Year;});
+			var Ymax = d3.max(data, function(d){return parseInt(d.X);});
+			var Ymin = d3.min(data, function(d){return parseInt(d.NX);});
+			var Xmax = d3.max(data, function(d){return parseInt(d.Year);});
+			var Xmin = d3.min(data, function(d){return parseInt(d.Year);});
 			var xScale = d3.scaleLinear().domain([Xmin , Xmax]).range([n, xr-n]);
 			var yScale = d3.scaleLinear().domain([Ymin , Ymax]).range([h-n, 2*n]);
 
