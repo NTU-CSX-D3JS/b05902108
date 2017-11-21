@@ -16,3 +16,6 @@ function std_dev(arr){
     	x = Math.sqrt(x/m);
 	return x;
 }
+function sort(arr){
+	return arr.sort();
+}
