@@ -1,0 +1,6 @@
+function parseInt_array(arr){
+	var ret = arr;
+	for(var i = 0; i < arr.length; i++)
+		ret[i] = parseInt(ret[i]);
+	return ret;
+}
