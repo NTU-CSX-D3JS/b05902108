@@ -16,3 +16,17 @@ function std_dev(arr){
     	x = Math.sqrt(x/m);
 	return x;
 }
+function max(arr){
+	var ret = parseInt(arr[0]);
+	for(var i = 0; i < arr.length; i++)
+		if(ret < parseInt(arr[i]))
+			ret = parseInt(arr[i]);
+	return ret;
+}
+function min(arr){
+	var ret = parseInt(arr[0]);
+	for(var i = 0; i < arr.length; i++)
+		if(ret > parseInt(arr[i]))
+			ret = parseInt(arr[i]);
+	return ret;
+}
