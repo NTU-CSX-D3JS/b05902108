@@ -1,17 +1,14 @@
 [
 	{
   		"coords": {"lat": 25.02, "lng":121.532},
-  		"iconImage": "star_icon",
   		"content":"<h1>123</h1>"
 	},
 	{
   		"coords":{"lat": 25.02, "lng":121.542},
-  		"iconImage": "star_icon",
   		"content":"<h1>123</h1>"
   	},
 	{
   		"coords":{"lat": 25.01, "lng":121.522},
-  		"iconImage": "star_icon",
   		"content":"<h1>123</h1>"
   	}
 ]
