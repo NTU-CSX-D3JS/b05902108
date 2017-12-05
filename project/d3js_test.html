@@ -28,7 +28,7 @@
       function initMap() {
         // options
         var options = {
-        	zoom: 15,
+        	zoom: 13,
         	center: {lat: 25.0169826, lng: 121.5376303}
         }
         
@@ -90,6 +90,8 @@
       		}
       		if(props.content){
       			var infoWindow = new google.maps.InfoWindow({
+		      		maxWidth: 100,
+		      		maxHeight:100,
 		      		content: props.content
 		      	});
 
