@@ -226,7 +226,7 @@ td{border-width:0 1px;}
 
 /* Colours
 --------------------------------------------------------------------------------------------------------------- */
-body{color:#C1C1C1; background-color:#1D1E1F;}
+body{color:#C1C1C1; background-color:#1D3A1F;}
 a{color:#A1C6D9;}
 a:active, a:focus{background:transparent;}/* IE10 + 11 Bugfix - prevents grey background */
 hr, .borderedbox{border-color:#D7D7D7;}
