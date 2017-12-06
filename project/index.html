@@ -45,15 +45,89 @@
   </header>
 </div>
 
-<div class="wrapper bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
-  <div id="pageintro" class="hoc clear"> 
-    <article>
-      <h2 class="heading">Vivamus tempor purus mauris sollicitudin</h2>
-      <p>Turpis eget facilisis duis vitae lacus eleifend laoreet.</p>
-      <footer><a class="btn" href="#">Tristique lectus</a></footer>
-    </article>
-  </div>
-</div>
+<div id="map"></div>
+<script>
+  function initMap() {
+    // options
+    var options = {
+      zoom: 13,
+      center: {lat: 25.0169826, lng: 121.5376303}
+    }
+    
+    // New map
+    var map = new google.maps.Map(document.getElementById('map'), options);
+    
+    // default icons
+    var mc_icon = {
+    url: "https://ntu-csx-d3js.github.io/b05902108/project/image/mcdonald_icon.png", // url
+    scaledSize: new google.maps.Size(25, 25), // scaled size
+};
+var star_icon = {
+    url: "https://ntu-csx-d3js.github.io/b05902108/project/image/starbucks_icon.png", // url
+    scaledSize: new google.maps.Size(25, 25), // scaled size
+};
+
+    // deal with starbuck data
+    $.getJSON("https://ntu-csx-d3js.github.io/b05902108/project/data/starbucks.json", function(starData) {
+    console.log(starData); 
+    var d_len = starData.length;
+    for(var i = 0; i < d_len; i++){
+        addMarker(starData[i], star_icon);
+      }
+       
+      // draw circle with problistic density function
+      var center_lat = 0;
+      var center_lng = 0;
+      var max_len = 0;
+      for(var i = 0; i < d_len; i++){
+        center_lat = center_lat + starData[i].coords.lat;
+        center_lng = center_lng + starData[i].coords.lng;
+      }
+      center_lat = center_lat/d_len;
+      center_lng = center_lng/d_len;
+      center = {lat: center_lat, lng: center_lng};
+      var cityCircle = new google.maps.Circle({
+          strokeColor: '#FFFFFF',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35,
+          map: map,
+          center: center,
+          radius: 2000
+      });
+
+});
+    
+    // Add Marker Function
+    function addMarker(props, what_icon){
+      var marker = new google.maps.Marker({
+        position: props.coords,
+        map: map,
+        icon: what_icon
+      });
+
+      if(what_icon){
+        marker.setIcon(what_icon);
+      }
+      if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+          maxWidth: 100,
+          maxHeight:100,
+          content: props.content
+        });
+
+        marker.addListener('click', function(){
+          infoWindow.open(map, marker);
+        })
+      }
+    }
+  
+  }
+  
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCHe_BArJHasg07-VcENIwq0Pjeork94g&callback=initMap"
+async defer></script>
 
 <div class="wrapper row3">
   <main class="hoc container clear"> 
