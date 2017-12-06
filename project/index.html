@@ -60,6 +60,7 @@
   </header>
 </div>
 
+
 <div id="map"></div>
 <script>
   function initMap() {
@@ -74,45 +75,45 @@
     
     // default icons
     var mc_icon = {
-    url: "https://ntu-csx-d3js.github.io/b05902108/project/image/mcdonald_icon.png", // url
-    scaledSize: new google.maps.Size(25, 25), // scaled size
-};
-var star_icon = {
-    url: "https://ntu-csx-d3js.github.io/b05902108/project/image/starbucks_icon.png", // url
-    scaledSize: new google.maps.Size(25, 25), // scaled size
-};
+        url: "https://ntu-csx-d3js.github.io/b05902108/project/image/mcdonald_icon.png", // url
+        scaledSize: new google.maps.Size(25, 25), // scaled size
+    };
+    var star_icon = {
+        url: "https://ntu-csx-d3js.github.io/b05902108/project/image/starbucks_icon.png", // url
+        scaledSize: new google.maps.Size(25, 25), // scaled size
+    };
 
     // deal with starbuck data
     $.getJSON("https://ntu-csx-d3js.github.io/b05902108/project/data/starbucks.json", function(starData) {
-    console.log(starData); 
-    var d_len = starData.length;
-    for(var i = 0; i < d_len; i++){
-        addMarker(starData[i], star_icon);
-      }
-       
-      // draw circle with problistic density function
-      var center_lat = 0;
-      var center_lng = 0;
-      var max_len = 0;
-      for(var i = 0; i < d_len; i++){
-        center_lat = center_lat + starData[i].coords.lat;
-        center_lng = center_lng + starData[i].coords.lng;
-      }
-      center_lat = center_lat/d_len;
-      center_lng = center_lng/d_len;
-      center = {lat: center_lat, lng: center_lng};
-      var cityCircle = new google.maps.Circle({
-          strokeColor: '#FFFFFF',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: '#FF0000',
-          fillOpacity: 0.35,
-          map: map,
-          center: center,
-          radius: 2000
-      });
+        console.log(starData); 
+        var d_len = starData.length;
+        for(var i = 0; i < d_len; i++){
+            addMarker(starData[i], star_icon);
+          }
+           
+          // draw circle with problistic density function
+          var center_lat = 0;
+          var center_lng = 0;
+          var max_len = 0;
+          for(var i = 0; i < d_len; i++){
+            center_lat = center_lat + starData[i].coords.lat;
+            center_lng = center_lng + starData[i].coords.lng;
+          }
+          center_lat = center_lat/d_len;
+          center_lng = center_lng/d_len;
+          center = {lat: center_lat, lng: center_lng};
+          var cityCircle = new google.maps.Circle({
+              strokeColor: '#FFFFFF',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35,
+              map: map,
+              center: center,
+              radius: 2000
+          });
 
-});
+    });
     
     // Add Marker Function
     function addMarker(props, what_icon){
@@ -137,9 +138,7 @@ var star_icon = {
         })
       }
     }
-  
   }
-  
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCHe_BArJHasg07-VcENIwq0Pjeork94g&callback=initMap"
 async defer></script>
@@ -174,193 +173,6 @@ async defer></script>
   </main>
 </div>
 
-<div class="wrapper">
-  <section id="latest" class="container clear"> 
-    <div class="center btmspace-80">
-      <h3 class="font-x2 nospace">Convallis neque nam id</h3>
-      <p class="nospace">Nisi tellus curabitur vitae massa sollicitudin.</p>
-    </div>
-    <ul class="nospace group">
-      <li>
-        <figure class="txtoverlay"><a href="#"><img src="images/demo/latest/01.png" alt=""></a>
-          <figcaption class="txtcaption">
-            <h6 class="heading">Malesuada</h6>
-            <p>Mauris quis commodo massa nam enim nulla luctus sit amet suscipit.</p>
-            <footer><a href="#">View Details &raquo;</a></footer>
-          </figcaption>
-        </figure>
-      </li>
-      <li>
-        <figure class="txtoverlay"><a href="#"><img src="images/demo/latest/02.png" alt=""></a>
-          <figcaption class="txtcaption">
-            <h6 class="heading">Pellentesque</h6>
-            <p>Vitae suscipit eget aliquam id purus vehicula malesuada convallis.</p>
-            <footer><a href="#">View Details &raquo;</a></footer>
-          </figcaption>
-        </figure>
-      </li>
-      <li>
-        <figure class="txtoverlay"><a href="#"><img src="images/demo/latest/01.png" alt=""></a>
-          <figcaption class="txtcaption">
-            <h6 class="heading">Molestie</h6>
-            <p>Eros placerat eget curabitur lobortis enim quis leo tempor porta.</p>
-            <footer><a href="#">View Details &raquo;</a></footer>
-          </figcaption>
-        </figure>
-      </li>
-      <li>
-        <figure class="txtoverlay"><a href="#"><img src="images/demo/latest/02.png" alt=""></a>
-          <figcaption class="txtcaption">
-            <h6 class="heading">Ultricies</h6>
-            <p>Quis dapibus scelerisque lacus felis mollis risus at tristique dolor.</p>
-            <footer><a href="#">View Details &raquo;</a></footer>
-          </figcaption>
-        </figure>
-      </li>
-      <li>
-        <figure class="txtoverlay"><a href="#"><img src="images/demo/latest/01.png" alt=""></a>
-          <figcaption class="txtcaption">
-            <h6 class="heading">Tincidunt</h6>
-            <p>Ultricies efficitur nulla id ullamcorper erat cras nec quam vel urna.</p>
-            <footer><a href="#">View Details &raquo;</a></footer>
-          </figcaption>
-        </figure>
-      </li>
-      <li>
-        <figure class="txtoverlay"><a href="#"><img src="images/demo/latest/02.png" alt=""></a>
-          <figcaption class="txtcaption">
-            <h6 class="heading">Vehicula</h6>
-            <p>Urna convallis vitae pellentesque odio faucibus sed porta molestie est.</p>
-            <footer><a href="#">View Details &raquo;</a></footer>
-          </figcaption>
-        </figure>
-      </li>
-    </ul>
-  </section>
-</div>
-<div class="wrapper row3">
-  <section class="hoc container clear"> 
-    <div class="btmspace-50">
-      <h3 class="font-x2 nospace">Rutrum porttitor pellentesque</h3>
-      <p class="nospace">Gravida tincidunt tortor ac efficitur fusce sed arcu lorem.</p>
-    </div>
-    <div class="group">
-      <article class="one_third first"><a href="#"><img class="btmspace-30" src="images/demo/320x210.png" alt=""></a>
-        <h4 class="nospace font-x1">Quisque a euismod erat</h4>
-        <p>Dictum mauris duis ac odio ullamcorper varius a sed orci phasellus sapien ex porttitor ac velit sollicitudin&hellip;</p>
-        <footer><a class="btn" href="#">Read More</a></footer>
-      </article>
-      <article class="one_third"><a href="#"><img class="btmspace-30" src="images/demo/320x210.png" alt=""></a>
-        <h4 class="nospace font-x1">Vestibulum mauris nisl</h4>
-        <p>Hendrerit massa nam bibendum dui nec nisi mollis placerat morbi nunc arcu non cursus vitae nibh quis&hellip;</p>
-        <footer><a class="btn" href="#">Read More</a></footer>
-      </article>
-      <article class="one_third"><a href="#"><img class="btmspace-30" src="images/demo/320x210.png" alt=""></a>
-        <h4 class="nospace font-x1">Gravida in mi ac ornare</h4>
-        <p>Imperdiet faucibus arcu sed egestas tempus aliquet maecenas quis augue mauris varius tortor euismod&hellip;</p>
-        <footer><a class="btn" href="#">Read More</a></footer>
-      </article>
-    </div>
-  </section>
-</div>
-<div class="wrapper bgded" style="background-image:url('images/demo/backgrounds/02.png');">
-  <div class="hoc split clear">
-    <article class="box clear"> 
-      <h6 class="heading">Fermentum cras varius</h6>
-      <p class="btmspace-30">Porttitor sagittis convallis purus in dictum metus consequat vel donec fringilla velit at augue euismod sodales fusce&hellip;</p>
-      <footer><a class="btn" href="#">Read More</a></footer>
-    </article>
-  </div>
-</div>
-<div class="wrapper row3">
-  <div class="hoc container clear center"> 
-    <article>
-      <h2 class="heading font-x3">Venenatis fringilla ligula convallis<br>
-        ligula natoque dapibus eros</h2>
-      <p class="btmspace-50">Vitae urna eros cum sociis penatibus et magnis dis parturient.</p>
-      <p class="btmspace-50"><a class="btn" href="#">Ridiculus</a></p>
-      <footer class="font-xs">** Montes nascetur mus sed<br>
-        sapien enim amet volutpat libero sit</footer>
-    </article>
-  </div>
-</div>
-<div class="wrapper bgded" style="background-image:url('images/demo/backgrounds/03.png');">
-  <ul class="nospace group clrbox">
-    <li>
-      <article>
-        <h4 class="heading">Suspendisse potenti nullam</h4>
-        <p>Fermentum convallis elit duis nec magna quis dolor vulputate aliquet dapibus ullamcorper suspendisse sit amet&hellip;</p>
-        <footer><a class="btn" href="#">Read More</a></footer>
-      </article>
-    </li>
-    <li>
-      <article>
-        <h4 class="heading">Nec rutrum tellus sit</h4>
-        <p>Ex cursus luctus donec consequat vitae mi in dictum praesent posuere mi nibh eu vehicula sapien tincidunt vel&hellip;</p>
-        <footer><a class="btn inverse" href="#">Read More</a></footer>
-      </article>
-    </li>
-    <li>
-      <article>
-        <h4 class="heading">Amet mattis aenean</h4>
-        <p>Velit id nulla varius suscipit nulla vulputate ex id congue venenatis justo massa congue lacus lorem lectus&hellip;</p>
-        <footer><a class="btn" href="#">Read More</a></footer>
-      </article>
-    </li>
-  </ul>
-</div>
-<div class="wrapper row4">
-  <footer id="footer" class="hoc clear"> 
-    <div class="one_quarter first">
-      <h6 class="title">Fermentum mi ornare</h6>
-      <p>Consectetur sodales interdum sed feugiat tellus orci id fringilla sem pulvinar in aliquam mattis nisl ac justo venenatis gravida vel nulla velit placerat.</p>
-      <p>Sollicitudin suscipit ut eleifend lorem non ultrices blandit praesent lobortis malesuada dictum phasellus.</p>
-    </div>
-    <div class="one_quarter">
-      <h6 class="title">Vestibulum a maximus</h6>
-      <ul class="nospace linklist contact">
-        <li><i class="fa fa-map-marker"></i>
-          <address>
-          Street Name &amp; Number, Town, Postcode/Zip
-          </address>
-        </li>
-        <li><i class="fa fa-phone"></i> +00 (123) 456 7890<br>
-          +00 (123) 456 7890</li>
-        <li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
-        <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
-      </ul>
-    </div>
-    <div class="one_quarter">
-      <h6 class="title">Etiam quam est lacinia</h6>
-      <ul class="nospace linklist">
-        <li><a href="#">Fringilla nunc proin et lacus</a></li>
-        <li><a href="#">Vestibulum condimentum</a></li>
-        <li><a href="#">Donec condimentum tellus</a></li>
-        <li><a href="#">Placerat tristique etiam orci</a></li>
-        <li><a href="#">Euismod lacinia bibendum in</a></li>
-      </ul>
-    </div>
-    <div class="one_quarter">
-      <h6 class="title">Nec ipsum a venenatis</h6>
-      <ul class="nospace linklist">
-        <li>
-          <article>
-            <h6 class="nospace font-x1"><a href="#">Erat sed aliquet auctor</a></h6>
-            <time class="font-xs block btmspace-10" datetime="2045-04-06">Friday, 6<sup>th</sup> April 2045</time>
-            <p class="nospace">Felis laoreet porta at vitae mauris praesent vel risus&hellip;</p>
-          </article>
-        </li>
-        <li>
-          <article>
-            <h6 class="nospace font-x1"><a href="#">Ultricies duis sed ex quis</a></h6>
-            <time class="font-xs block btmspace-10" datetime="2045-04-05">Thursday, 5<sup>th</sup> April 2045</time>
-            <p class="nospace">Volutpat orci vestibulum non placerat felis sed sollicitudin&hellip;</p>
-          </article>
-        </li>
-      </ul>
-    </div>
-  </footer>
-</div>
 <div class="wrapper row5">
   <div id="copyright" class="hoc clear"> 
     <p class="fl_left">Copyright &copy; 2016 - All Rights Reserved - <a href="#">Domain Name</a></p>
