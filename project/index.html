@@ -2,18 +2,15 @@
 <html>
 <head>
 <title>Simple Map</title>
+<script src="https://d3js.org/d3.v4.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 <style>
-  /* Always set the map height explicitly to define the size of the div
-   * element that contains the map. */
   #map {
     height: 400px;
     width: 100%;
   }
-  /* Optional: Makes the sample page fill the window. */
   html, body {
     height: 100%;
     margin: 0;
@@ -21,104 +18,81 @@
   }
 </style>
 </head>
-<body id="top">
 
-<div class="wrapper row1">
-  <header id="header" class="hoc clear"> 
-    <div id="logo" class="fl_left">
-      <h1><a href="index.html">麥當勞和星巴克調查</a></h1>
+<body id="top">
+<div>
+  <header id="header"> 
+    <div id="logo">
+      <h1><center><a href="index.html">麥當勞和星巴克調查</a></center></h1>
     </div>
-    <nav id="mainav" class="fl_right">
-      <ul class="clear">
-        <li class="active"><a href="index.html">可能會用到? Home</a></li>
-        <li><a class="drop" href="#">Pages</a>
-          <ul>
-            <li><a href="pages/gallery.html">Gallery</a></li>
-            <li><a href="pages/full-width.html">Full Width</a></li>
-            <li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
-            <li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
-            <li><a href="pages/basic-grid.html">Basic Grid</a></li>
-          </ul>
-        </li>
-        <li><a class="drop" href="#">Dropdown</a>
-          <ul>
-            <li><a href="#">Level 2</a></li>
-            <li><a class="drop" href="#">Level 2 + Drop</a>
-              <ul>
-                <li><a href="#">Level 3</a></li>
-                <li><a href="#">Level 3</a></li>
-                <li><a href="#">Level 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Level 2</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Link Text</a></li>
-        <li><a href="#">Link Text</a></li>
-      </ul>
-    </nav>
   </header>
 </div>
 
-
 <div id="map"></div>
+<div class="bars"></div>
+<div class="pie"></div>
+
+<!-- ... 36~223是script ... -->
 <script>
+  var url = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks.csv"
+  
   function initMap() {
     // options
     var options = {
-      zoom: 13,
-      center: {lat: 25.0169826, lng: 121.5376303}
+      zoom: 7,
+      center: {lat: 23.9169826, lng: 121.4376303}
     }
-    
+  
     // New map
     var map = new google.maps.Map(document.getElementById('map'), options);
     
     // default icons
     var mc_icon = {
         url: "https://ntu-csx-d3js.github.io/b05902108/project/image/mcdonald_icon.png", // url
-        scaledSize: new google.maps.Size(25, 25), // scaled size
+        scaledSize: new google.maps.Size(10, 10), // scaled size
     };
     var star_icon = {
         url: "https://ntu-csx-d3js.github.io/b05902108/project/image/starbucks_icon.png", // url
-        scaledSize: new google.maps.Size(25, 25), // scaled size
+        scaledSize: new google.maps.Size(10, 10), // scaled size
     };
 
     // deal with starbuck data
-    $.getJSON("https://ntu-csx-d3js.github.io/b05902108/project/data/starbucks.json", function(starData) {
-        console.log(starData); 
-        var d_len = starData.length;
-        for(var i = 0; i < d_len; i++){
-            addMarker(starData[i], star_icon);
-          }
-           
-          // draw circle with problistic density function
-          var center_lat = 0;
-          var center_lng = 0;
-          var max_len = 0;
-          for(var i = 0; i < d_len; i++){
-            center_lat = center_lat + starData[i].coords.lat;
-            center_lng = center_lng + starData[i].coords.lng;
-          }
-          center_lat = center_lat/d_len;
-          center_lng = center_lng/d_len;
-          center = {lat: center_lat, lng: center_lng};
-          var cityCircle = new google.maps.Circle({
-              strokeColor: '#FFFFFF',
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
-              fillColor: '#FF0000',
-              fillOpacity: 0.35,
-              map: map,
-              center: center,
-              radius: 2000
-          });
-
+    d3.csv(url, function(data){
+      var d_len = data.length;
+      for(var i = 0; i < d_len; i++){
+        addMarker(data[i], star_icon);
+      }
     });
     
+    /**
+    // draw circle
+    var center_lat = 0;
+    var center_lng = 0;
+    var max_len = 0;
+    for(var i = 0; i < d_len; i++){
+      center_lat = center_lat + starData[i].coords.lat;
+      center_lng = center_lng + starData[i].coords.lng;
+    }
+    center_lat = center_lat/d_len;
+    center_lng = center_lng/d_len;
+    center = {lat: center_lat, lng: center_lng};
+    var cityCircle = new google.maps.Circle({
+        strokeColor: '#FFFFFF',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        map: map,
+        center: center,
+        radius: 2000
+    });**/
+
     // Add Marker Function
     function addMarker(props, what_icon){
+      coord = {"lat":parseFloat(props.lat), "lng":parseFloat(props.lng)};
+      content = "<div id=\"content\"><h4>星巴克</h4><p>門市:"+props.name+"<br>城市:"+props.city+"<br>地址:"+props.address+"</p></div></div>"
       var marker = new google.maps.Marker({
-        position: props.coords,
+        position: coord,
         map: map,
         icon: what_icon
       });
@@ -126,11 +100,11 @@
       if(what_icon){
         marker.setIcon(what_icon);
       }
-      if(props.content){
+      if(content){
         var infoWindow = new google.maps.InfoWindow({
-          maxWidth: 100,
+          maxWidth: 250,
           maxHeight:100,
-          content: props.content
+          content: content
         });
 
         marker.addListener('click', function(){
@@ -138,51 +112,116 @@
         })
       }
     }
+
   }
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCHe_BArJHasg07-VcENIwq0Pjeork94g&callback=initMap"
 async defer></script>
 
-<div class="wrapper row3">
-  <main class="hoc container clear"> 
-    <div class="group btmspace-80">
-      <div class="one_half first">
-        <h4>Vivamus lobortis consequat</h4>
-        <p>Ipsum quisque tincidunt placerat dui vitae aliquet nisl volutpat vitae cras non tristique nisl phasellus tempus elit proin vel imperdiet diam mauris efficitur nisl elit eu ornare massa ultricies.</p>
-      </div>
-      <div class="one_half">
-        <p>Vestibulum venenatis sed id nisl magna suspendisse a mauris et neque sollicitudin ullamcorper fusce molestie felis mi id.</p>
-        <p>Sollicitudin augue faucibus eu sed dictum egestas magna a pretium elit dapibus vitae etiam auctor arcu enim eu tempus elit.</p>
-      </div>
-    </div>
-    <div class="group">
-      <article class="one_third first"><a href="#"><i class="block btmspace-15 fa fa-4x fa-key"></i></a>
-        <h4>Semper mauris sed</h4>
-        <p>Commodo non nunc leo risus lacinia eget leo sed interdum molestie lorem sed dapibus ante sit amet egestas.</p>
-      </article>
-      <article class="one_third"><a href="#"><i class="block btmspace-15 fa fa-4x fa-leaf"></i></a>
-        <h4>Elit porttitor mauris</h4>
-        <p>Ligula pharetra lectus sed rhoncus enim nibh eu metus praesent nec bibendum lectus suspendisse vel dolor nec.</p>
-      </article>
-      <article class="one_third"><a href="#"><i class="block btmspace-15 fa fa-4x fa-legal"></i></a>
-        <h4>Auctor pretium vel</h4>
-        <p>Sed facilisis magna vitae metus vulputate eleifend mauris gravida porta erat a lacinia vivamus egestas dapibus eros quis.</p>
-      </article>
-    </div>
-    <div class="clear"></div>
-  </main>
-</div>
+<script>
+  var home_salary = "https://ntu-csx-d3js.github.io/b02106020/project/home_salary.csv";
+  var starbucks = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks.csv";
+  var distribution = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks_distribution.csv"
+  var color = d3.scaleOrdinal(d3.schemeCategory20);
+    
+  function bar (url) {  // csv (city, number)
+      d3.csv(url, function(data){
+        console.log(data);
+        var margin = {top:20, right:20, bottom: 30, left: 40},
+          width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+        var yMax = (d3.max(data, function(d){ return parseInt(d.number)}));
+        var yMin = (d3.min(data, function(d){ return parseInt(d.number)}));
+        var cities = [];
+        data.forEach(function(d){
+          cities.push(d.city);
+        });
+        // console.log(cities);
+        var xScale = d3.scaleBand().domain(cities).rangeRound([0,width]).padding(0.1); //d3.range(data.length)
+        var yScale = d3.scaleLinear().range([height,0]).domain([0, yMax]);
+        //create svg
+        var svg = d3.select(".bars").append("svg").attr("width",width + margin.left + margin.right).attr("height",height + margin.top + margin.bottom).append("g").attr("transform","translate("+margin.left+","+margin.top+")");
+        svg.selectAll(".bar")
+          .data(data)
+          .enter()
+          .append("rect")
+          .attr("class","bar")
+          .attr("x", function(d) { return xScale(d.city); })
+          .attr("width", xScale.bandwidth())
+          .attr("y", function(d) { return height; })
+          .attr("height","0")
+          .attr("fill", function(d) { return color(d.number%20);})
+          .on("click", function(d) { console.log(d) })
+          .transition().duration(2000)
+          .attr("y", function(d) { return yScale(d.number); })
+          .attr("height", function(d) { return height - yScale(d.number) });
+        //Create labels
+        svg.selectAll("text")
+         .data(data)
+         .enter()
+         .append("text")
+         .attr("x", function(d) { return xScale(d.city) + xScale.bandwidth()/2; })
+         .attr("y", height)
+         .attr("fill","transparent")
+         .transition().duration(2000)
+         .text(function(d) { return d.number; })
+         .attr("text-anchor", "middle")
+         .attr("y", function(d) { return yScale(d.number) - 2; })
+         .attr("font-family", "sans-serif")
+         .attr("font-size", "10px")
+         .attr("fill", "black");
+          
+        //append axis
+        svg.append("g")
+          .attr("transform","translate(0,"+height+")")
+          .call(d3.axisBottom(xScale));
+        svg.append("g")
+          .call(d3.axisLeft(yScale));              
+      });
+  };
+  //draw a starbucks distribution bar chart
+  bar(distribution);
+  function pie (url) {  // csv (city, number)
+    d3.csv(url, function(data){
+    console.log(data);
+    var margin = {top:20, right:20, bottom: 20, left: 20},
+      width = 960 - margin.left - margin.right,
+      height = 540 - margin.top - margin.bottom,
+      radius = height/2;
+    var vis = d3.select(".pie").append("svg").data([data]).attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("svg:g").attr("transform", "translate(" + (radius+margin.left) + "," + (radius+margin.top) + ")");
+    var pie = d3.pie().value(function(d){return parseInt(d.number);});
+    // declare an arc generator function
+    var arc = d3.arc().outerRadius(radius).innerRadius(0.5);
+    // select paths, use arc generator to draw
+    var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+    arcs.append("svg:path")
+      .transition().duration(2000)
+      .attr("fill", function(d, i){ return color(i);})
+      .attr("d", function (d) { return arc(d);});
+    arcs.append("svg:text").attr("transform", function(d) {
+        var c = arc.centroid(d);
+        return "translate(" + c[0]*1.8 +"," + c[1]*1.8 + ")";})
+      .attr("text-anchor", "middle").text( function(d, i) {
+        return data[i].number;})
+        .attr("font-size","10px");
+    arcs.append("svg:g").attr("transform", "translate(300,0)")
+    .append("rect")
+    .attr("x", "0")
+    .attr("y", function(d,i){ return (-200 + i*20); })
+    .attr("width","10")
+    .attr("height","10")
+    .attr("fill", function(d, i){ return color(i);})
+    
+    arcs.append("text").attr("transform","translate(315,10)")
+    .attr("x", "0")
+    .attr("y", function(d,i){ return (-200 + i*20); })
+    .text(function(d, i) {return data[i].city;});
+    }); 
+  };
+      //draw a starbucks distribution bar chart
+  pie(distribution);
+</script>
 
-<div class="wrapper row5">
-  <div id="copyright" class="hoc clear"> 
-    <p class="fl_left">Copyright &copy; 2016 - All Rights Reserved - <a href="#">Domain Name</a></p>
-    <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
-  </div>
-</div>
-<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
-<!-- JAVASCRIPTS -->
-<script src="layout/scripts/jquery.min.js"></script>
-<script src="layout/scripts/jquery.backtotop.js"></script>
-<script src="layout/scripts/jquery.mobilemenu.js"></script>
 </body>
 </html>
