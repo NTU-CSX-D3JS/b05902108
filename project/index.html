@@ -35,10 +35,7 @@
 <!-- ... 36~223是script ... -->
 <script>
   var startbucks_url = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks.csv"
-
-  $.getJSON("https://ntu-csx-d3js.github.io/b05902108/Boundary.json", function(json) {
-        console.log(json[1]);
-    });
+  
   function initMap() {
     // options
     var options = {
@@ -73,9 +70,10 @@
       var city_url = "https://ntu-csx-d3js.github.io/b05902108/project/data/city/" + cities[i] + ".csv";
       console.log(city_url);
       d3.csv(city_url, function(data){
-        var temp;
+        var temp = [];
+        console.log(data[0])
         for(var j = 0; j < data.length; j++){
-          temp[j] = [{lat:data[j].Latitude,lng:data[j].Longitude}];  
+          temp[j] = {lat:parseFloat(data[j].Latitude),lng:parseFloat(data[j].Longitude)};  
         }
         var triangleCoords = temp;
         var bermudaTriangle = new google.maps.Polygon({
