@@ -35,7 +35,6 @@
 <!-- ... 36~223是script ... -->
 <script>
   var startbucks_url = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks.csv"
-  var city_url = "https://ntu-csx-d3js.github.io/b05902108/project/data/city.csv"
 
   $.getJSON("https://ntu-csx-d3js.github.io/b05902108/Boundary.json", function(json) {
         console.log(json[1]);
@@ -69,11 +68,16 @@
     });
 
     // draw city boundary
-    d3.csv(city_url, function(data){
-      var cities = [182, 67];
-      for(var j = 0; j < cities.length; j++){
-        
-        var triangleCoords = ;
+    var cities = ["Taipei", "keelung"];
+    for(var i = 0; i < cities.length; i++){
+      var city_url = "https://ntu-csx-d3js.github.io/b05902108/project/data/city/" + cities[i] + ".csv";
+      console.log(city_url);
+      d3.csv(city_url, function(data){
+        var temp;
+        for(var j = 0; j < data.length; j++){
+          temp[j] = [{lat:data[j].Latitude,lng:data[j].Longitude}];  
+        }
+        var triangleCoords = temp;
         var bermudaTriangle = new google.maps.Polygon({
           paths: triangleCoords,
           strokeColor: '#FF0000',
@@ -83,9 +87,8 @@
           fillOpacity: 0.35
         });
         bermudaTriangle.setMap(map);
-      }
-    });
-
+      });
+    }
     // Add Marker Function
     function addMarker(props, what_icon){
       coord = {"lat":parseFloat(props.lat), "lng":parseFloat(props.lng)};
