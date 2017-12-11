@@ -34,7 +34,9 @@
 
 <!-- ... 36~223是script ... -->
 <script>
-  var url = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks.csv"
+  var startbucks_url = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks.csv"
+  var city_url = "https://ntu-csx-d3js.github.io/b05902108/project/data/city.csv"
+
   $.getJSON("https://ntu-csx-d3js.github.io/b05902108/Boundary.json", function(json) {
         console.log(json[1]);
     });
@@ -59,48 +61,30 @@
     };
 
     // deal with starbuck data
-    d3.csv(url, function(data){
+    d3.csv(startbucks_url, function(data){
       var d_len = data.length;
       for(var i = 0; i < d_len; i++){
         addMarker(data[i], star_icon);
       }
     });
-    
-    var triangleCoords = [
-      {lng:120.30355568100003,lat:22.545496665000087}, {lng:120.30340709900008,lat:22.545522033000054}, {lng:120.30325905300003,lat:22.54554730600006}, {lng:120.302960977,lat:22.545558300000039}, {lng:120.30282071400006,lat:22.545563471000037}, {lng:120.30201200500005,lat:22.545760229000052}, {lng:120.3018568650001,lat:22.545344597000053}, {lng:120.30170591900003,lat:22.544940197000074}, {lng:120.30146712100009,lat:22.545017107000035}, {lng:120.30161344400005,lat:22.54540912300007}, {lng:120.30176676800011,lat:22.54581989400009}, {lng:120.30155345700007,lat:22.545871792000071}, {lng:120.30149126100002,lat:22.545975376000058}, {lng:120.30142335900007,lat:22.545975081000051}, {lng:120.30134260700004,lat:22.546083099000043}, {lng:120.30108285800009,lat:22.546170020000091}, {lng:120.30037665300006,lat:22.546647841000038}, {lng:120.300305245,lat:22.546667563000085}, {lng:120.30029618000003,lat:22.546670066000047}, {lng:120.299809643,lat:22.546945427000082}, {lng:120.29980293000006,lat:22.546949227000084}, {lng:120.298989818,lat:22.54740941700004}, {lng:120.2989506560001,lat:22.547412292000047}, {lng:120.29869956000005,lat:22.547430730000087}, {lng:120.29858210300006,lat:22.547466341000074}, {lng:120.29854481100006,lat:22.547511330000077}, {lng:120.298559673,lat:22.547696528000074}, {lng:120.29859282200005,lat:22.547780208000063}, {lng:120.29866665700001,lat:22.54783922900009}, {lng:120.29869777600004,lat:22.547843880000073}, {lng:120.29871847200002,lat:22.547890850000044}, {lng:120.298723032,lat:22.547901196000055}, {lng:120.29881498300006,lat:22.548109877000059}, {lng:120.29903933000003,lat:22.548619014000053}, {lng:120.29922704600006,lat:22.54904502100004}, {lng:120.29939680300004,lat:22.549241555000037}, {lng:120.30007463200002,lat:22.550026291000052}, {lng:120.30025854400003,lat:22.550342029000035}, {lng:120.30064687600009,lat:22.551008713000044}, {lng:120.30067427000006,lat:22.551055741000084}, {lng:120.30068505700001,lat:22.551074259000075}, {lng:120.30064150200008,lat:22.551125995000064}, {lng:120.30063445400003,lat:22.551187781000067}, {lng:120.30063424700006,lat:22.55118959400005}
-    ];
-    var bermudaTriangle = new google.maps.Polygon({
-      paths: triangleCoords,
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35
-    });
-    bermudaTriangle.setMap(map);
 
-    /**
-    // draw circle
-    var center_lat = 0;
-    var center_lng = 0;
-    var max_len = 0;
-    for(var i = 0; i < d_len; i++){
-      center_lat = center_lat + starData[i].coords.lat;
-      center_lng = center_lng + starData[i].coords.lng;
-    }
-    center_lat = center_lat/d_len;
-    center_lng = center_lng/d_len;
-    center = {lat: center_lat, lng: center_lng};
-    var cityCircle = new google.maps.Circle({
-        strokeColor: '#FFFFFF',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#FF0000',
-        fillOpacity: 0.35,
-        map: map,
-        center: center,
-        radius: 2000
-    });**/
+    // draw city boundary
+    d3.csv(city_url, function(data){
+      var cities = [182, 67];
+      for(var j = 0; j < cities.length; j++){
+        
+        var triangleCoords = ;
+        var bermudaTriangle = new google.maps.Polygon({
+          paths: triangleCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        bermudaTriangle.setMap(map);
+      }
+    });
 
     // Add Marker Function
     function addMarker(props, what_icon){
@@ -237,197 +221,5 @@ async defer></script>
       //draw a starbucks distribution bar chart
   pie(distribution);
 </script>
-<osm version="0.6" generator="CGImap 0.6.0 (21500 thorn-02.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
-<relation id="1293250" visible="true" version="88" changeset="45851281" timestamp="2017-02-06T10:03:26Z" user="Ngidnen" uid="4673040">
-<member type="way" ref="87104985" role="outer"/>
-<member type="way" ref="309600590" role="outer"/>
-<member type="way" ref="219640313" role="outer"/>
-<member type="way" ref="280529674" role="outer"/>
-<member type="way" ref="309600615" role="outer"/>
-<member type="way" ref="309600634" role="outer"/>
-<member type="way" ref="309600629" role="outer"/>
-<member type="way" ref="280529561" role="outer"/>
-<member type="way" ref="309600642" role="outer"/>
-<member type="way" ref="280529570" role="outer"/>
-<member type="way" ref="309600640" role="outer"/>
-<member type="way" ref="217556781" role="outer"/>
-<member type="way" ref="198449055" role="outer"/>
-<member type="way" ref="254608049" role="outer"/>
-<member type="way" ref="253557572" role="outer"/>
-<member type="way" ref="311290900" role="outer"/>
-<member type="way" ref="253557575" role="outer"/>
-<member type="way" ref="309236967" role="outer"/>
-<member type="way" ref="309236968" role="outer"/>
-<member type="way" ref="309236966" role="outer"/>
-<member type="way" ref="87132352" role="outer"/>
-<member type="way" ref="301467349" role="outer"/>
-<member type="way" ref="301467342" role="outer"/>
-<member type="way" ref="87196327" role="outer"/>
-<member type="way" ref="301315606" role="outer"/>
-<member type="way" ref="301315649" role="outer"/>
-<member type="way" ref="254642110" role="outer"/>
-<member type="way" ref="217556780" role="outer"/>
-<member type="way" ref="301315653" role="outer"/>
-<member type="way" ref="244181357" role="outer"/>
-<member type="way" ref="301315619" role="outer"/>
-<member type="way" ref="274150196" role="outer"/>
-<member type="way" ref="244181355" role="outer"/>
-<member type="way" ref="244181349" role="outer"/>
-<member type="way" ref="87196332" role="outer"/>
-<member type="way" ref="87196307" role="outer"/>
-<member type="way" ref="276163388" role="outer"/>
-<member type="way" ref="243939445" role="outer"/>
-<member type="way" ref="275791483" role="outer"/>
-<member type="way" ref="275783932" role="outer"/>
-<member type="way" ref="243939407" role="outer"/>
-<member type="way" ref="274150218" role="outer"/>
-<member type="way" ref="243939413" role="outer"/>
-<member type="way" ref="274150175" role="outer"/>
-<member type="way" ref="243939411" role="outer"/>
-<member type="way" ref="275776296" role="outer"/>
-<member type="way" ref="275776306" role="outer"/>
-<member type="way" ref="243939464" role="outer"/>
-<member type="way" ref="106374142" role="outer"/>
-<member type="way" ref="244181344" role="outer"/>
-<member type="way" ref="244181341" role="outer"/>
-<member type="way" ref="275776282" role="outer"/>
-<member type="way" ref="244181342" role="outer"/>
-<member type="way" ref="244181343" role="outer"/>
-<member type="way" ref="275776281" role="outer"/>
-<member type="way" ref="206996770" role="outer"/>
-<member type="way" ref="207043829" role="outer"/>
-<member type="way" ref="276791645" role="outer"/>
-<member type="way" ref="247045332" role="outer"/>
-<member type="way" ref="276556202" role="outer"/>
-<member type="way" ref="246998874" role="outer"/>
-<member type="way" ref="276556204" role="outer"/>
-<member type="way" ref="274150166" role="outer"/>
-<member type="way" ref="207043832" role="outer"/>
-<member type="way" ref="228985817" role="outer"/>
-<member type="way" ref="276550719" role="outer"/>
-<member type="way" ref="228985818" role="outer"/>
-<member type="way" ref="276550715" role="outer"/>
-<member type="way" ref="254607173" role="outer"/>
-<member type="way" ref="254607174" role="outer"/>
-<member type="way" ref="228985814" role="outer"/>
-<member type="way" ref="228985816" role="outer"/>
-<member type="way" ref="254607170" role="outer"/>
-<member type="way" ref="228985815" role="outer"/>
-<member type="way" ref="254607171" role="outer"/>
-<member type="way" ref="207001559" role="outer"/>
-<member type="way" ref="228968340" role="outer"/>
-<member type="way" ref="228968342" role="outer"/>
-<member type="way" ref="254607172" role="outer"/>
-<member type="way" ref="254607169" role="outer"/>
-<member type="way" ref="228968349" role="outer"/>
-<member type="way" ref="276550725" role="outer"/>
-<member type="way" ref="228968348" role="outer"/>
-<member type="way" ref="228968337" role="outer"/>
-<member type="way" ref="207043834" role="outer"/>
-<member type="way" ref="271984619" role="outer"/>
-<member type="way" ref="228968338" role="outer"/>
-<member type="way" ref="228968344" role="outer"/>
-<member type="way" ref="228968336" role="outer"/>
-<member type="way" ref="272225602" role="outer"/>
-<member type="way" ref="228968346" role="outer"/>
-<member type="way" ref="228968350" role="outer"/>
-<member type="way" ref="272225604" role="outer"/>
-<member type="way" ref="272225603" role="outer"/>
-<member type="way" ref="272225605" role="outer"/>
-<member type="way" ref="228968343" role="outer"/>
-<member type="way" ref="271984618" role="outer"/>
-<member type="way" ref="207076600" role="outer"/>
-<member type="way" ref="228968339" role="outer"/>
-<member type="way" ref="228968347" role="outer"/>
-<member type="way" ref="273312495" role="outer"/>
-<member type="way" ref="273312496" role="outer"/>
-<member type="way" ref="274374560" role="outer"/>
-<member type="way" ref="228968341" role="outer"/>
-<member type="way" ref="228968345" role="outer"/>
-<member type="way" ref="274374561" role="outer"/>
-<member type="way" ref="274374559" role="outer"/>
-<member type="way" ref="207001562" role="outer"/>
-<member type="way" ref="274616990" role="outer"/>
-<member type="way" ref="272539876" role="outer"/>
-<member type="way" ref="274616989" role="outer"/>
-<member type="way" ref="274616991" role="outer"/>
-<member type="way" ref="272980247" role="outer"/>
-<member type="way" ref="272539874" role="outer"/>
-<member type="way" ref="274478730" role="outer"/>
-<member type="way" ref="274478735" role="outer"/>
-<member type="way" ref="274616988" role="outer"/>
-<member type="way" ref="274478729" role="outer"/>
-<member type="way" ref="274478736" role="outer"/>
-<member type="way" ref="274616987" role="outer"/>
-<member type="way" ref="274478727" role="outer"/>
-<member type="way" ref="274478732" role="outer"/>
-<member type="way" ref="274478728" role="outer"/>
-<member type="way" ref="210340845" role="outer"/>
-<member type="way" ref="271953594" role="outer"/>
-<member type="way" ref="274478726" role="outer"/>
-<member type="way" ref="271862488" role="outer"/>
-<member type="way" ref="274478731" role="outer"/>
-<member type="way" ref="274478733" role="outer"/>
-<member type="way" ref="271862485" role="outer"/>
-<member type="way" ref="274478734" role="outer"/>
-<member type="way" ref="271862484" role="outer"/>
-<member type="way" ref="216618634" role="outer"/>
-<member type="way" ref="271862490" role="outer"/>
-<member type="way" ref="282333807" role="outer"/>
-<member type="way" ref="282333808" role="outer"/>
-<member type="way" ref="216618633" role="outer"/>
-<member type="way" ref="286720960" role="outer"/>
-<member type="way" ref="217429447" role="outer"/>
-<member type="way" ref="219640310" role="outer"/>
-<member type="way" ref="87103279" role="outer"/>
-<member type="way" ref="281012981" role="outer"/>
-<member type="way" ref="284189541" role="outer"/>
-<member type="way" ref="280843281" role="outer"/>
-<member type="way" ref="280843285" role="outer"/>
-<member type="way" ref="284189527" role="outer"/>
-<member type="way" ref="281012982" role="outer"/>
-<member type="way" ref="281012980" role="outer"/>
-<member type="way" ref="284189496" role="outer"/>
-<member type="way" ref="284189503" role="outer"/>
-<member type="way" ref="280821606" role="outer"/>
-<member type="way" ref="86979292" role="outer"/>
-<member type="way" ref="284801768" role="outer"/>
-<member type="way" ref="285093765" role="outer"/>
-<member type="way" ref="87104291" role="outer"/>
-<member type="way" ref="219640311" role="outer"/>
-<member type="way" ref="271862605" role="outer"/>
-<member type="way" ref="202633942" role="outer"/>
-<member type="way" ref="271862570" role="outer"/>
-<member type="way" ref="207486518" role="outer"/>
-<member type="node" ref="1147314253" role="admin_centre"/>
-<member type="relation" ref="2905064" role="subarea"/>
-<member type="relation" ref="2822029" role="subarea"/>
-<member type="relation" ref="2905065" role="subarea"/>
-<member type="relation" ref="2822030" role="subarea"/>
-<member type="relation" ref="2782528" role="subarea"/>
-<member type="relation" ref="2783061" role="subarea"/>
-<member type="relation" ref="2869465" role="subarea"/>
-<member type="relation" ref="2881029" role="subarea"/>
-<member type="relation" ref="2881028" role="subarea"/>
-<member type="relation" ref="2881027" role="subarea"/>
-<member type="relation" ref="2881105" role="subarea"/>
-<member type="relation" ref="2905066" role="subarea"/>
-<tag k="admin_level" v="4"/>
-<tag k="boundary" v="administrative"/>
-<tag k="ISO3166-2" v="TW-TPE"/>
-<tag k="land_area" v="administrative"/>
-<tag k="name" v="臺北市"/>
-<tag k="name:de" v="Taipeh"/>
-<tag k="name:en" v="Taipei"/>
-<tag k="name:ja" v="台北市"/>
-<tag k="name:ko" v="타이베이 시"/>
-<tag k="name:ru" v="Тайбэй"/>
-<tag k="name:vi" v="Đài Bắc"/>
-<tag k="name:zh" v="臺北市"/>
-<tag k="type" v="boundary"/>
-<tag k="wikidata" v="Q1867"/>
-<tag k="wikipedia" v="zh:臺北市"/>
-</relation>
-</osm>
 </body>
 </html>
