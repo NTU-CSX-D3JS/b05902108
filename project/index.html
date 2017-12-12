@@ -72,10 +72,9 @@
     for(var i = 0; i < cities.length; i++){
       var city_url = "https://ntu-csx-d3js.github.io/b05902108/project/data/city/" + cities[i] + ".csv";
       console.log(city_url);
-      var app = [1, 2, 5];
       d3.csv(city_url, function(data){
         var temp = [];
-        var color = ['#FF000', '#FF0022', '#FF0033']
+        var color = ['#FF000', '#FF0022', '#FF0033', '#FF0044', '#FF0044', '#FF0055', '#FF0066', '#FF0077', '#FF0088', '#FF0099', '#FF00AA', '#FF00BB', '#FF00CC', '#FF00DD', '#FF00EE', '#FF00FF', '#FF0011', '#770044', '#660044', '#550044']
         for(var j = 0; j < data.length; j++){
           temp[j] = {lat:parseFloat(data[j].Latitude),lng:parseFloat(data[j].Longitude)};  
         }
@@ -85,7 +84,7 @@
           strokeColor: '#FF0000',
           strokeOpacity: 0.8,
           strokeWeight: 2,
-          fillColor: '#FF0011',
+          fillColor: color[data[0].Index],
           fillOpacity: 0.35
         });
         bermudaTriangle.setMap(map);
