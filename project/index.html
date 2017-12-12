@@ -75,7 +75,6 @@
       console.log(city_url);
       d3.csv(city_url, function(data){
         var temp = [];
-        console.log(data[200])
         for(var j = 0; j < data.length; j++){
           temp[j] = {lat:parseFloat(data[j].Latitude),lng:parseFloat(data[j].Longitude)};  
         }
