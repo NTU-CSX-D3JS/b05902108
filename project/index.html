@@ -74,7 +74,7 @@
       console.log(city_url);
       d3.csv(city_url, function(data){
         var temp = [];
-        var color = ['#FF000', '#FF0022', '#FF0033', '#FF0044', '#FF0044', '#FF0055', '#FF0066', '#FF0077', '#FF0088', '#FF0099', '#FF00AA', '#FF00BB', '#FF00CC', '#FF00DD', '#FF00EE', '#FF00FF', '#FF0011', '#770044', '#660044', '#550044']
+        var color = ['#F0000', '#5F0022', '#7F0033', '#FF0144', '#2F3044', '#F40A55', '#4FA066', '#8F0C77', '#1FC088', '#F90199', '#2002AA', '#FF00BB', '#FF00CC', '#FF00DD', '#FF00EE', '#FF00FF', '#330011', '#770044', '#660044', '#550044']
         for(var j = 0; j < data.length; j++){
           temp[j] = {lat:parseFloat(data[j].Latitude),lng:parseFloat(data[j].Longitude)};  
         }
