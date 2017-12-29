@@ -1,230 +1,340 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>Simple Map</title>
-<script src="https://d3js.org/d3.v4.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<style>
-  #map {
-    height: 400px;
-    width: 100%;
-  }
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-</style>
-</head>
+<html lang="en">
 
-<body id="top">
-<div>
-  <header id="header"> 
-    <div id="logo">
-      <h1><center><a href="index.html">麥當勞和星巴克調查</a></center></h1>
+  <head>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Resume - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendor/devicons/css/devicons.min.css" rel="stylesheet">
+    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/resume.min.css" rel="stylesheet">
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+      }
+      
+    </style>
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">Start Bootstrap</span>
+        <span class="d-none d-lg-block">
+          <p>星巴克調查</p>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#GOOGLE_MAP">GOOGLE MAP</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#drawBar">BAR CHART</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#drawPie">PIE CHART</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#analysis">Analysis</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid p-0">
+
+      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
+        <div class="my-auto">
+          <h2 class="mb-0">星巴克
+            <span class="text-primary">地理位置調查</span>
+          </h2>
+          <p class="mb-5">我們對於星巴克在台灣的分佈，有很大的興趣，因此對此作出相應的分析。<br>其中用到
+          google map地圖上的分佈，以及bar chart和pie chart在視覺上的呈現。<br>組員：b05902108施承志、
+          b02106020游子賢</p>
+          <ul class="list-inline list-social-icons mb-0">
+            <li class="list-inline-item">
+              <a href="https://github.com">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="GOOGLE_MAP">
+        <div class="my-auto">
+          <h3 class="mb-5"><center>星巴克在台灣的分佈</center></h3>
+        </div>
+          <div id="map"></div>
+
+        
+
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="drawBar">
+        <div class="my-auto">
+          <h3 class="mb-5"><center>長條圖分佈</center></h3>
+          <div class="bars"></div>      
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="drawPie">
+        <div class="my-auto">
+          <h3 class="mb-5"><center>圓餅圖分佈</center></h3>
+          <div class="pie"></div>      
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="analysis">
+        <div class="my-auto">
+          <h3 class="mb-5"><center>Analysis</center></h3>
+          <p>從以上圖中，可以看見星巴克集中在北部。</p>
+        </div>
+      </section>
+
     </div>
-  </header>
-</div>
 
-<div id="map"></div>
-<div class="bars"></div>
-<div class="pie"></div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- ... 36~223是script ... -->
-<script>
-  var startbucks_url = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks.csv"
-  
-  function initMap() {
-    // options
-    var options = {
-      zoom: 7,
-      center: {lat: 23.9169826, lng: 121.4376303}
-    }
-  
-    // New map
-    var map = new google.maps.Map(document.getElementById('map'), options);
-    
-    // default icons
-    var mc_icon = {
-        url: "https://ntu-csx-d3js.github.io/b05902108/project/image/mcdonald_icon.png", // url
-        scaledSize: new google.maps.Size(13, 13), // scaled size
-    };
-    var star_icon = {
-        url: "https://ntu-csx-d3js.github.io/b05902108/project/image/starbucks_icon.png", // url
-        scaledSize: new google.maps.Size(13, 13), // scaled size
-    };
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    // deal with starbuck data
-    d3.csv(startbucks_url, function(data){
-      var d_len = data.length;
-      for(var i = 0; i < d_len; i++){
-        addMarker(data[i], star_icon);
-      }
-    });
+    <!-- Custom scripts for this template -->
+    <script src="js/resume.min.js"></script>
 
-    // decide what color to draw
-    var home_salary_url = "https://ntu-csx-d3js.github.io/b02106020/project/home_salary.csv"
-    
-    // draw city boundary
-    var cities = ["new_taipei", "taipei", "keelung", "hsinchu", "hsinchu_city", "taoyuan", "miaoli", "taichung", "changhua", "yunlin", "chiayi", "chiayi_city", "tainan", "kaohsiung", "pingtung", "nantou", "taitung", "hualien", "ilan", "penghu"];
-    for(var i = 0; i < cities.length; i++){
-      var city_url = "https://ntu-csx-d3js.github.io/b05902108/project/data/city/" + cities[i] + ".csv";
-      console.log(city_url);
-      d3.csv(city_url, function(data){
-        var temp = [];
-        var color = ['#F0000', '#5F0022', '#7F0033', '#FF0144', '#2F3044', '#F40A55', '#4FA066', '#8F0C77', '#1FC088', '#F90199', '#2002AA', '#FF00BB', '#FF00CC', '#FF00DD', '#FF00EE', '#FF00FF', '#330011', '#770044', '#660044', '#550044']
-        for(var j = 0; j < data.length; j++){
-          temp[j] = {lat:parseFloat(data[j].Latitude),lng:parseFloat(data[j].Longitude)};  
+    <!-- Google map script -->
+    <script>
+      var startbucks_url = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks.csv"
+      
+      function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
         }
-        var triangleCoords = temp;
-        var bermudaTriangle = new google.maps.Polygon({
-          paths: triangleCoords,
-          strokeColor: '#FF0000',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: color[data[0].Index],
-          fillOpacity: 0.35
-        });
-        bermudaTriangle.setMap(map);
-      });
-    }
-
-    // Add Marker Function
-    function addMarker(props, what_icon){
-      coord = {"lat":parseFloat(props.lat), "lng":parseFloat(props.lng)};
-      content = "<div id=\"content\"><h4>星巴克</h4><p>門市:"+props.name+"<br>城市:"+props.city+"<br>地址:"+props.address+"</p></div></div>"
-      var marker = new google.maps.Marker({
-        position: coord,
-        map: map,
-        icon: what_icon
-      });
-
-      if(what_icon){
-        marker.setIcon(what_icon);
+        return color;
       }
-      if(content){
-        var infoWindow = new google.maps.InfoWindow({
-          maxWidth: 250,
-          maxHeight:100,
-          content: content
+
+      function initMap() {
+        // options
+        var options = {
+          zoom: 7,
+          center: {lat: 23.9169826, lng: 121.4376303}
+        }
+      
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+        
+        // default icons
+        var mc_icon = {
+            url: "https://ntu-csx-d3js.github.io/b05902108/project/image/mcdonald_icon.png", // url
+            scaledSize: new google.maps.Size(13, 13), // scaled size
+        };
+        var star_icon = {
+            url: "https://ntu-csx-d3js.github.io/b05902108/project/image/starbucks_icon.png", // url
+            scaledSize: new google.maps.Size(13, 13), // scaled size
+        };
+
+        // deal with starbuck data
+        d3.csv(startbucks_url, function(data){
+          var d_len = data.length;
+          for(var i = 0; i < d_len; i++){
+            addMarker(data[i], star_icon);
+          }
         });
 
-        marker.addListener('click', function(){
-          infoWindow.open(map, marker);
-        })
+        // decide what color to draw
+        var home_salary_url = "https://ntu-csx-d3js.github.io/b02106020/project/home_salary.csv"
+        
+        // draw city boundary
+        var cities = ["new_taipei", "taipei", "keelung", "hsinchu", "hsinchu_city", "taoyuan", "miaoli", "taichung", "changhua", "yunlin", "chiayi", "chiayi_city", "tainan", "kaohsiung", "pingtung", "nantou", "taitung", "hualien", "ilan", "penghu"];
+        for(var i = 0; i < cities.length; i++){
+          var city_url = "https://ntu-csx-d3js.github.io/b05902108/project/data/city/" + cities[i] + ".csv";
+          console.log(city_url);
+          d3.csv(city_url, function(data){
+            var temp = [];
+            for(var j = 0; j < data.length; j++){
+              temp[j] = {lat:parseFloat(data[j].Latitude),lng:parseFloat(data[j].Longitude)};  
+            }
+            var triangleCoords = temp;
+            var bermudaTriangle = new google.maps.Polygon({
+              paths: triangleCoords,
+              strokeColor: '#FFFFF0',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: getRandomColor(),
+              fillOpacity: 0.35
+            });
+            bermudaTriangle.setMap(map);
+          });
+        }
+
+        // Add Marker Function
+        function addMarker(props, what_icon){
+          coord = {"lat":parseFloat(props.lat), "lng":parseFloat(props.lng)};
+          content = "<div id=\"content\"><h4>星巴克</h4><p>門市:"+props.name+"<br>城市:"+props.city+"<br>地址:"+props.address+"</p></div></div>"
+          var marker = new google.maps.Marker({
+            position: coord,
+            map: map,
+            icon: what_icon
+          });
+
+          if(what_icon){
+            marker.setIcon(what_icon);
+          }
+          if(content){
+            var infoWindow = new google.maps.InfoWindow({
+              maxWidth: 250,
+              maxHeight:100,
+              content: content
+            });
+
+            marker.addListener('click', function(){
+              infoWindow.open(map, marker);
+            })
+          }
+        }
+
       }
-    }
+    </script>
 
-  }
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCHe_BArJHasg07-VcENIwq0Pjeork94g&callback=initMap"
-async defer></script>
-
-<script>
-  var home_salary = "https://ntu-csx-d3js.github.io/b02106020/project/home_salary.csv";
-  var starbucks = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks.csv";
-  var distribution = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks_distribution.csv"
-  var color = d3.scaleOrdinal(d3.schemeCategory20);
+    <!-- Google map key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCHe_BArJHasg07-VcENIwq0Pjeork94g&callback=initMap"
+    async defer></script>
     
-  function bar (url) {  // csv (city, number)
-      d3.csv(url, function(data){
-        console.log(data);
-        var margin = {top:20, right:20, bottom: 30, left: 40},
-          width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
-        var yMax = (d3.max(data, function(d){ return parseInt(d.number)}));
-        var yMin = (d3.min(data, function(d){ return parseInt(d.number)}));
-        var cities = [];
-        data.forEach(function(d){
-          cities.push(d.city);
-        });
-        // console.log(cities);
-        var xScale = d3.scaleBand().domain(cities).rangeRound([0,width]).padding(0.1); //d3.range(data.length)
-        var yScale = d3.scaleLinear().range([height,0]).domain([0, yMax]);
-        //create svg
-        var svg = d3.select(".bars").append("svg").attr("width",width + margin.left + margin.right).attr("height",height + margin.top + margin.bottom).append("g").attr("transform","translate("+margin.left+","+margin.top+")");
-        svg.selectAll(".bar")
-          .data(data)
-          .enter()
-          .append("rect")
-          .attr("class","bar")
-          .attr("x", function(d) { return xScale(d.city); })
-          .attr("width", xScale.bandwidth())
-          .attr("y", function(d) { return height; })
-          .attr("height","0")
-          .attr("fill", function(d) { return color(d.number%20);})
-          .on("click", function(d) { console.log(d) })
-          .transition().duration(2000)
-          .attr("y", function(d) { return yScale(d.number); })
-          .attr("height", function(d) { return height - yScale(d.number) });
-        //Create labels
-        svg.selectAll("text")
-         .data(data)
-         .enter()
-         .append("text")
-         .attr("x", function(d) { return xScale(d.city) + xScale.bandwidth()/2; })
-         .attr("y", height)
-         .attr("fill","transparent")
-         .transition().duration(2000)
-         .text(function(d) { return d.number; })
-         .attr("text-anchor", "middle")
-         .attr("y", function(d) { return yScale(d.number) - 2; })
-         .attr("font-family", "sans-serif")
-         .attr("font-size", "10px")
-         .attr("fill", "black");
-          
-        //append axis
-        svg.append("g")
-          .attr("transform","translate(0,"+height+")")
-          .call(d3.axisBottom(xScale));
-        svg.append("g")
-          .call(d3.axisLeft(yScale));              
-      });
-  };
-  //draw a starbucks distribution bar chart
-  bar(distribution);
-  function pie (url) {  // csv (city, number)
-    d3.csv(url, function(data){
-    console.log(data);
-    var margin = {top:20, right:20, bottom: 20, left: 20},
-      width = 960 - margin.left - margin.right,
-      height = 540 - margin.top - margin.bottom,
-      radius = height/2;
-    var vis = d3.select(".pie").append("svg").data([data]).attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("svg:g").attr("transform", "translate(" + (radius+margin.left) + "," + (radius+margin.top) + ")");
-    var pie = d3.pie().value(function(d){return parseInt(d.number);});
-    // declare an arc generator function
-    var arc = d3.arc().outerRadius(radius).innerRadius(0.5);
-    // select paths, use arc generator to draw
-    var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
-    arcs.append("svg:path")
-      .transition().duration(2000)
-      .attr("fill", function(d, i){ return color(i);})
-      .attr("d", function (d) { return arc(d);});
-    arcs.append("svg:text").attr("transform", function(d) {
-        var c = arc.centroid(d);
-        return "translate(" + c[0]*1.8 +"," + c[1]*1.8 + ")";})
-      .attr("text-anchor", "middle").text( function(d, i) {
-        return data[i].number;})
-        .attr("font-size","10px");
-    arcs.append("svg:g").attr("transform", "translate(300,0)")
-    .append("rect")
-    .attr("x", "0")
-    .attr("y", function(d,i){ return (-200 + i*20); })
-    .attr("width","10")
-    .attr("height","10")
-    .attr("fill", function(d, i){ return color(i);})
-    
-    arcs.append("text").attr("transform","translate(315,10)")
-    .attr("x", "0")
-    .attr("y", function(d,i){ return (-200 + i*20); })
-    .text(function(d, i) {return data[i].city;});
-    }); 
-  };
+    <!-- d3 js application -->
+    <script>
+      var home_salary = "https://ntu-csx-d3js.github.io/b02106020/project/home_salary.csv";
+      var starbucks = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks.csv";
+      var distribution = "https://ntu-csx-d3js.github.io/b02106020/project/starbucks_distribution.csv"
+      var color = d3.scaleOrdinal(d3.schemeCategory20);
+        
+      function bar (url) {  // csv (city, number)
+          d3.csv(url, function(data){
+            console.log(data);
+            var margin = {top:20, right:20, bottom: 30, left: 40},
+              width = 960 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+            var yMax = (d3.max(data, function(d){ return parseInt(d.number)}));
+            var yMin = (d3.min(data, function(d){ return parseInt(d.number)}));
+            var cities = [];
+            data.forEach(function(d){
+              cities.push(d.city);
+            });
+            // console.log(cities);
+            var xScale = d3.scaleBand().domain(cities).rangeRound([0,width]).padding(0.1); //d3.range(data.length)
+            var yScale = d3.scaleLinear().range([height,0]).domain([0, yMax]);
+            //create svg
+            var svg = d3.select(".bars").append("svg").attr("width",width + margin.left + margin.right).attr("height",height + margin.top + margin.bottom).append("g").attr("transform","translate("+margin.left+","+margin.top+")");
+            svg.selectAll(".bar")
+              .data(data)
+              .enter()
+              .append("rect")
+              .attr("class","bar")
+              .attr("x", function(d) { return xScale(d.city); })
+              .attr("width", xScale.bandwidth())
+              .attr("y", function(d) { return height; })
+              .attr("height","0")
+              .attr("fill", function(d) { return color(d.number%20);})
+              .on("click", function(d) { console.log(d) })
+              .transition().duration(2000)
+              .attr("y", function(d) { return yScale(d.number); })
+              .attr("height", function(d) { return height - yScale(d.number) });
+            //Create labels
+            svg.selectAll("text")
+             .data(data)
+             .enter()
+             .append("text")
+             .attr("x", function(d) { return xScale(d.city) + xScale.bandwidth()/2; })
+             .attr("y", height)
+             .attr("fill","transparent")
+             .transition().duration(2000)
+             .text(function(d) { return d.number; })
+             .attr("text-anchor", "middle")
+             .attr("y", function(d) { return yScale(d.number) - 2; })
+             .attr("font-family", "sans-serif")
+             .attr("font-size", "10px")
+             .attr("fill", "black");
+              
+            //append axis
+            svg.append("g")
+              .attr("transform","translate(0,"+height+")")
+              .call(d3.axisBottom(xScale));
+            svg.append("g")
+              .call(d3.axisLeft(yScale));              
+          });
+      };
       //draw a starbucks distribution bar chart
-  pie(distribution);
-</script>
-</body>
+      bar(distribution);
+      function pie (url) {  // csv (city, number)
+        d3.csv(url, function(data){
+        console.log(data);
+        var margin = {top:20, right:20, bottom: 20, left: 20},
+          width = 960 - margin.left - margin.right,
+          height = 540 - margin.top - margin.bottom,
+          radius = height/2;
+        var vis = d3.select(".pie").append("svg").data([data]).attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("svg:g").attr("transform", "translate(" + (radius+margin.left) + "," + (radius+margin.top) + ")");
+        var pie = d3.pie().value(function(d){return parseInt(d.number);});
+        // declare an arc generator function
+        var arc = d3.arc().outerRadius(radius).innerRadius(0.5);
+        // select paths, use arc generator to draw
+        var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+        arcs.append("svg:path")
+          .transition().duration(2000)
+          .attr("fill", function(d, i){ return color(i);})
+          .attr("d", function (d) { return arc(d);});
+        arcs.append("svg:text").attr("transform", function(d) {
+            var c = arc.centroid(d);
+            return "translate(" + c[0]*1.8 +"," + c[1]*1.8 + ")";})
+          .attr("text-anchor", "middle").text( function(d, i) {
+            return data[i].number;})
+            .attr("font-size","10px");
+        arcs.append("svg:g").attr("transform", "translate(300,0)")
+        .append("rect")
+        .attr("x", "0")
+        .attr("y", function(d,i){ return (-200 + i*20); })
+        .attr("width","10")
+        .attr("height","10")
+        .attr("fill", function(d, i){ return color(i);})
+        
+        arcs.append("text").attr("transform","translate(315,10)")
+        .attr("x", "0")
+        .attr("y", function(d,i){ return (-200 + i*20); })
+        .text(function(d, i) {return data[i].city;});
+        }); 
+      };
+          //draw a starbucks distribution bar chart
+      pie(distribution);
+    </script>
+  </body>
+
 </html>
